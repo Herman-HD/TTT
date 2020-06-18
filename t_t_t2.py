@@ -3,7 +3,6 @@ class Tic_Tac_Toe():
 
     def __init__(self, state):
         self.cells = list(state)
-##        print(self.cells)
         self.cell_dict = {(1,3):"_", (2,3):"_", (3,3):"_", (1,2):"_", (2,2):"_", (3,2):"_", (1,1):"_", (2,1):"_", (3,1):"_"}
         self.all_lines = []
         
@@ -55,22 +54,17 @@ class Tic_Tac_Toe():
                 print("You should enter numbers!")
             self.add_entry_result()      
 
-    def get_lines(self):
+    def get_win_lines(self):
         self.all_lines, self.all_entries = [], []
-        
         self.all_entries = [x for x in self.cells]
         self.rows = [self.cells[:3],self.cells[3:6],self.cells[6:9]]
         self.columns = [self.cells[0:9:3],self.cells[1:9:3],self.cells[2:9:3]]
         self.diagonals = [self.cells[0:9:4]] + [self.cells[2:7:2]]
-##            print(self.rows)
-##            print(self.columns)            
-##            print(self.diagonals)
         self.all_lines = self.rows + self.columns + self.diagonals
         return self.all_lines
         
 
     def play_result(self):
-##        while True:         
         if self.all_lines.count(["X", "X", "X"]) == 1 and self.all_lines.count(["O", "O", "O"]) == 1:
             print("Impossible")
             return True
@@ -80,13 +74,6 @@ class Tic_Tac_Toe():
         elif self.all_lines.count(["O", "O", "O"]) == 1:
             print("O wins")
             return True
-##            elif ( self.all_entries.count("X") == self.all_entries.count("O") ):
-##                if self.all_entries.count("_") >= 3:
-##                    print("Game not finished")
-##                    return True
-##                else:
-##                    print("Impossible")
-##                    return True
         elif self.all_entries.count("X") != self.all_entries.count("O"):
             if self.all_entries.count("_") == 0:
                 print("Draw")
@@ -104,16 +91,10 @@ class Tic_Tac_Toe():
         while continue_play: #self.add_entry():
             self.add_entry_result()
             self.display()
-            self.get_lines()
+            self.get_win_lines()
             if ["X", "X", "X"] in self.all_lines or ["O", "O", "O"] in self.all_lines or "_" not in self.cells:
                 continue_play = False
-##                self.get_lines()
                 self.play_result()
-##                print("No more moves")
-                
-##            print(continue_play)
-##            self.cells = list(input("Enter cells: "))
-##        self.play_result()
 
 game = Tic_Tac_Toe("_________")#input("Enter cells: "))
 game.play_ttt()
